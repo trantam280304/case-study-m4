@@ -97,8 +97,8 @@
                         <br>
                         <!-- select còn hàng hết hàng  -->
                         <select id="status" name="status" style="width: 90%">
-                            <option value="1" {{ $products->status == '1' ? 'selected' : '' }}>Còn hàng</option>
-                            <option value="0" {{ $products->status == '0' ? 'selected' : '' }}>Hết hàng</option>
+                            <option value="0" {{ $products->status == '0' ? 'selected' : '' }}>Còn hàng</option>
+                            <option value="1" {{ $products->status == '1' ? 'selected' : '' }}>Hết hàng</option>
                         </select>
                         <br><br>
                         <label>Category_id</label>

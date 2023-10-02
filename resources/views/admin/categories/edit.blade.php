@@ -75,7 +75,7 @@
                         <input type="text" id="name" name="name" value="{{$categories->name}}">
                         <br>
                         <label for="name">delete_at:</label>
-                        <input type="date  " id="delete_at" name="delete_at" value="{{$categories->delete_at}}">
+                        <input type="date" id="delete_at" name="delete_at" value="{{$categories->delete_at}}">
                         <div class="button-group">
                             <input type="submit" value="UPDATE" class="btn btn-primary">
                             <a href="{{ route('categories.index') }}" class="btn-back btn">BACK</a>

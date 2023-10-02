@@ -43,12 +43,12 @@
                     
                     <label>status:</label><br>
                     <select name="status" style="width: 90%">
-                        <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Còn hàng</option>
-                        <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Hết hàng</option>
+                        <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Còn hàng</option>
+                        <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Hết hàng</option>
                     </select><br><br>
                     @error('status')
                     <div style="color: red">{{ $message }}</div>
-                    @enderror
+                    @enderror   
                     
                     
                     <label for="category_id">Category_id:</label><br>
