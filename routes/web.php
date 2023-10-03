@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // categorie routes
+// thung rac
+
 Route::put('/softdeletes/{id}', [CategoryController::class, 'softdeletes'])->name('categories.softdeletes');
 
 Route::get('category/trash', [CategoryController::class, 'trash'])->name('categories.trash');
@@ -66,4 +69,35 @@ Route::get('/sign-in', function () {
 Route::get('/sign-up', function () {
     return view('admin.sign-up');
 });
-// thung rac
+
+Route::get('/shop', function () {
+    return view('shop.shopper');
+});
+
+// ddnawg ky shop
+
+Route::get('shop/register', [ShopController::class, 'register'])->name('shop.register');
+
+Route::post('shop/checkRegister', [ShopController::class, 'checkRegister'])->name('shop.checkRegister');
+
+// dang nhap shop
+Route::get('/login-index', [ShopController::class, 'indexlogin'])->name('login.index');
+
+Route::post('/login', [ShopController::class, 'checklogin'])->name('shop.checklogin');
+
+Route::get('/detail', function () {
+    return view('shop.layout.masterdetail');
+});
+
+Route::get('/layoutmaster', [ShopController::class, 'layoutmaster'])->name('shop.layoutmaster');
+
+
+
+
+
+
+
+
+
+
+
