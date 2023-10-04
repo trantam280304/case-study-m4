@@ -5,7 +5,7 @@
 
     .table {
         border-collapse: collapse;
-        width: 100%;
+        width: 90%;
     }
 
     .table th,
@@ -61,26 +61,37 @@
                     <table class="table">
                         <thead class="">
                             <tr>
-                                <th scope="col" class="w-5">ID</th>
-                                <th scope="col">NAME</th>
-                                <th scope="col">SLUG </th>
-                                <th scope="col">PRICE</th>
-                                <th scope="col">DESCRIPTION</th>
-                                <th scope="col">QUANNITY</th>
-                                <th scope="col">STATUS</th>
-                                <th scope="col">CATEGORY</th>
-                                <th scope="col">IMAGE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                             <tr>
+                                <h3>XEM CHI TIẾT SẢN PHẨM</h3>
+                            </tr>
+                            <tr>
+                                <td>ID :</td>
                                 <td>{{ $products->id }}</td>
+                            </tr>
+                            <tr>
+                                <td>NAME :</td>
                                 <td>{{ $products->name }}</td>
+                            </tr>
+                            <tr>
+                                <td>SLUG :</td>
                                 <td>{{ $products->slug }}</td>
+                            </tr>
+                            <tr>
+                                <td>PRICE :</td>
                                 <td>{{ $products->price }}</td>
-                                <td>{!! $products->description !!}</td>
+                            </tr>
+                            <tr>
+                                <td>DESCRIPTION :</td>
+                                <td >{!! $products->description !!}</td>
+                            </tr>
+
+                            <tr>
+                                <td>QUANNITY :</td>
                                 <td>{{ $products->quantity }}</td>
-                                    @if ($products->status == 0)
+                            </tr>
+                            <tr>
+                                <td>STATUS :</td>
+                                @if ($products->status == 0)
                                 <td><span class="badge bg-success">
                                         <i class="fas fa-check-circle"></i> Còn hàng
                                     </span></td>
@@ -89,10 +100,18 @@
                                         <i class="fas fa-times-circle"></i> Hết hàng
                                     </span></td>
                                 @endif
+                            </tr>
+                            <tr>
+                                <td>CATEGORY :</td>
                                 <td>{{ $products->category->name }}</td>
+                            </tr>
+                            <tr>
+                                <td>IMAGE :</td>
                                 <td><img src="{{ asset($products->image) }}" alt="Ảnh" width="90px" height="90px"></td>
                             </tr>
-                        </tbody>
+
+                            </thead>
+                       
                     </table>
                     <a href="{{ route('products.index') }}" class="btn-back">BACK</a>
 

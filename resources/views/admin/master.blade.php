@@ -54,7 +54,6 @@
   
     </div>
   </main>
-  
 
   <!--   Core JS Files   -->
   <script src="{{('assets/js/core/popper.min.js')}}"></script>

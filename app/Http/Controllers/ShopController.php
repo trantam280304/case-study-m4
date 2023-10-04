@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 class ShopController extends Controller
 {
+    // đăng ký
     public function register(){
         return view('shop.loginlogout.register');
     }
@@ -57,8 +60,107 @@ class ShopController extends Controller
         return view('shop.loginlogout.login');
     }
     
-    public function layoutmaster()
+    
+
+  // xem chi tiết     
+    public function detail($id)
     {
-        return view('shop.home');
+        $product = Product::find($id);
+        // Lấy các sản phẩm có liên quan (ví dụ: cùng danh mục)
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '<>', $product->id) // Loại bỏ sản phẩm hiện tại
+            ->inRandomOrder() // Sắp xếp ngẫu nhiên
+            ->get();
+        return view('shop.detail', compact('product', 'relatedProducts'));
     }
+
+    public function shop()
+    {
+        $products = Product::get();
+        $param = [
+            'products' => $products
+        ];
+        return view('shop.home', $param);
+        
+    }
+    
+
+
+    // cart
+     /**
+     * Write code on Method
+     *
+     
+  
+  
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function cart()
+    {
+        return view('shop.cart');
+    }
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function addToCart($id)
+    {
+        $products = Product::findOrFail($id);
+          
+        $cart = session()->get('cart', []);
+  
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name" => $products->name,
+                "quantity" => 1,
+                "price" => $products->price,
+                "image" => $products->image
+                
+            ];
+        }
+          
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function update(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product removed successfully');
+        }
+    }
+    
+    
+   
 }

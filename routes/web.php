@@ -42,7 +42,14 @@ Route::post('/categories/store', [CategoryController::class, 'store'])->name('ca
 
 
 
-// categorie products
+//  products
+
+Route::put('product /softdeletes/{id}', [ProductController::class, 'softdeletes'])->name('products.softdeletes');
+
+Route::put('product/restoredelete/{id}', [ProductController::class, 'restoredelete'])->name('products.restoredelete');
+
+
+Route::get('products/trash', [ProductController::class, 'trash'])->name('products.trash');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
@@ -70,9 +77,14 @@ Route::get('/sign-up', function () {
     return view('admin.sign-up');
 });
 
-Route::get('/shop', function () {
-    return view('shop.shopper');
-});
+// Route::get('/shop', function () {
+//     return view('shop.home');
+// });
+
+// Route::get('/cart', function () {
+//     return view('shop.cart');
+// });
+
 
 // ddnawg ky shop
 
@@ -85,11 +97,22 @@ Route::get('/login-index', [ShopController::class, 'indexlogin'])->name('login.i
 
 Route::post('/login', [ShopController::class, 'checklogin'])->name('shop.checklogin');
 
-Route::get('/detail', function () {
-    return view('shop.layout.masterdetail');
-});
 
-Route::get('/layoutmaster', [ShopController::class, 'layoutmaster'])->name('shop.layoutmaster');
+
+Route::get('/shop', [ShopController::class, 'shop'])->name('shop.layoutmaster');
+
+Route::get('/detail/{id}', [ShopController::class, 'detail'])->name('shop.detail');
+
+
+
+//cart
+
+Route::get('/cart', [ShopController::class, 'cart'])->name('shop.cart');
+
+Route::get('add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('update-cart', [ShopController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
+
 
 
 

@@ -70,45 +70,45 @@
                     @endforeach
                 </thead>
 
-                <body>
+                    <body>
 
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.css">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.js"></script>
-                    @if (session('successMessage'))
-                    <script>
-                        Swal.fire({
-                            title: "<h6>{{ session('successMessage') }}</h6>",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            width: "300px"
-                        });
-                    </script>
-                    @elseif(session('successMessage1'))
-                    <script>
-                        Swal.fire({
-                            title: "<h6>{{ session('successMessage1') }}</h6>",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            width: "300px"
-                        });
-                    </script>
-                    @elseif(session('successMessage2'))
-                    <script>
-                        Swal.fire({
-                            title: "<h6>{{ session('successMessage2') }}</h6>",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            width: "300px"
-                        });
-                    </script>
-                    @endif
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.css">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.js"></script>
+                        @if (session('successMessage'))
+                        <script>
+                            Swal.fire({
+                                title: "<h6>{{ session('successMessage') }}</h6>",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                width: "300px"
+                            });
+                        </script>
+                        @elseif(session('successMessage1'))
+                        <script>
+                            Swal.fire({
+                                title: "<h6>{{ session('successMessage1') }}</h6>",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                width: "300px"
+                            });
+                        </script>
+                        @elseif(session('successMessage2'))
+                        <script>
+                            Swal.fire({
+                                title: "<h6>{{ session('successMessage2') }}</h6>",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                width: "300px"
+                            });
+                        </script>
+                        @endif
 
 
-                </body>
+                    </body>
             </table>
             <!-- phan trang -->
             <div class="card-footer">
