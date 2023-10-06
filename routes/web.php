@@ -124,3 +124,5 @@ Route::delete('remove-from-cart', [ShopController::class, 'remove'])->name('remo
 
 
 
+
+

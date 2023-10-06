@@ -64,7 +64,8 @@
         <div class="col-md-6 col-12 py-5">
             <div class="text-center mb-2 pb-2">
                 <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay Updated</span></h2>
-                <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo labore labore.</p>
+                <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo
+                    labore labore.</p>
             </div>
             <form action="">
                 <div class="input-group">
@@ -80,31 +81,57 @@
 <!-- Subscribe End -->
 
 
-<div class="container-fluid pt-5">
+<div class="container-fluid pt-5" id="data-wrapper">
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Just Arrived</span></h2>
     </div>
     <div class="row px-xl-5 pb-3">
-        @foreach ( $products as $product )
-        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="card product-item border-0 mb-4">
-                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                    <img class="img-fluid w-100" src="{{ asset($product->image) }}" style="max-width: 230px; height: 250px;">
-                </div>
-                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                    <h6 class="text-truncate mb-3">{{ $product->name }} </h6>
-                    <div class="d-flex justify-content-center">
-                        <h6>{{ $product->price }} $</h6>
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between bg-light border">
-                    <a href="{{ route('shop.detail', $product->id) }}" class="btn btn-sm text-dark p-0">
-                        <i class="fas fa-eye text-primary mr-1"></i>View Detail
-                    </a>
-                     <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                </div>
-            </div>
+        @include("shop.product_home")
+    </div>
+</div>
+
+<!-- show more -->
+<div class="col-12 text-center m-3">
+    <button class="btn btn-success load-more-product" style="background-color: #696969;">Show more</button>
+</div>
+<div class="auto-load text-center ml-3" style="display: none;">
+    <div class="d-flex justify-content-center">
+        <div role="status">
+            <span>Loading...</span>
         </div>
-        @endforeach
-        
-        @endsection
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--  ajax nè  -->
+<script>
+    var ENDPOINT = "{{ route('shop.layoutmaster') }}"
+    var page = 1;
+    $(".load-more-product").click(function() {
+        page++;
+        LoadMore(page);
+    });
+
+    function LoadMore(page) {
+        $.ajax({
+                url: ENDPOINT + "?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function() {
+                    $('.auto-load').show();
+                },
+            })
+            .done(function(response) {
+                if (response.html == '') {
+                    $('.auto-load').html("");
+                    return;
+                }
+                $('.auto-load').hide();
+                $("#data-wrapper").append("<div class='row m-5'>" + response.html + "</div>");
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                console.log('Sever error occurred');
+            });
+    }
+</script>
+@endsection

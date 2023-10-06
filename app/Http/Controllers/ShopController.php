@@ -74,14 +74,17 @@ class ShopController extends Controller
         return view('shop.detail', compact('product', 'relatedProducts'));
     }
 
-    public function shop()
+    public function shop(Request $request)
     {
-        $products = Product::get();
+        $products = Product::paginate(4);
+        if ($request->ajax()) {
+            $view = view('shop.product_home',compact('products'))->render();
+            return response()->json(['html' => $view]);
+        }
         $param = [
-            'products' => $products
+            'products' => $products,
         ];
-        return view('shop.home', $param);
-        
+        return view('shop.home',$param);
     }
     
 
