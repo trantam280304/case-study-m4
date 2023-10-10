@@ -66,7 +66,7 @@
                     <h5 class="font-weight-bold">Total</h5>
                     <h5 class="font-weight-bold">${{ $total }}</h5>
                 </div>
-                <button class="btn btn-block btn-primary my-3 py-3"> Checkout</button>
+                <a href="{{ route('shop.checkout') }}">  <button class="btn btn-block btn-primary my-3 py-3"> Check Out   </button></a>
                 <a href="{{ route('shop.layoutmaster') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
             </div>
 

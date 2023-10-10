@@ -25,21 +25,14 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="{{route('products.index')}}">
+          <a class="nav-link text-white " href="{{route('products.index')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fas fa-folder"></i>
               </div>
             <span class="nav-link-text ms-1">Products</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white "href="{{route('categories.index')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Category</span>
-          </a>
-        </li>
+
         <li class="nav-item">
           <a class="nav-link text-white "  href="{{route('products.trash')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -48,39 +41,53 @@
             <span class="nav-link-text ms-1">Trash products</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{route('products.trash')}}">
+          <a class="nav-link text-white " href="{{route('group.index')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-            </div>
-            <span class="nav-link-text ms-1">URL</span>
+            <i class="fas fa-users"></i>
+              </div>
+            <span class="nav-link-text ms-1">Groups</span>
           </a>
         </li>
+
+
+
+
+
+
+
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/notifications.html">
+          <a class="nav-link text-white "href="{{route('categories.index')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">notifications</i>
+              <i class="material-icons opacity-10">receipt_long</i>
             </div>
-            <span class="nav-link-text ms-1">Notifications</span>
+            <span class="nav-link-text ms-1">Category</span>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white "href="{{route('order.index')}}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">assignment</i>
+            </div>
+            <span class="nav-link-text ms-1">order</span>
+          </a>
+        </li>
+       
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/profile.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
+       
         <li class="nav-item">
           <a class="nav-link text-white " href="http://127.0.0.1:8000/sign-in">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">login</i>
             </div>
-            <span class="nav-link-text ms-1">Sign In</span>
+              <form action="{{ route('logoutadmin') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to log out')">Logout</button>
+            </form>
           </a>
         </li>
         <li class="nav-item">
@@ -91,6 +98,7 @@
             <span class="nav-link-text ms-1">Sign Up</span>
           </a>
         </li>
+       
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
@@ -98,4 +106,4 @@
       </div>
     </div>
   </aside>
- 
+  

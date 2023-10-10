@@ -40,7 +40,9 @@
                             <form action="{{ route('categories.softdeletes', $category->id) }}" method="POST">
                                 @method('PUT')
                                 @csrf
+
                                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> EDIT</a>
+                                
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có muốn chuyển nó đến thùng rác ?')"><i class="fas fa-trash"></i> DELETE</button>
                             </form>
                         </td>

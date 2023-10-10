@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('group_role', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('group_id')->constrained('groups');
-            $table->foreignId('role_id')->constrained('roles');
-            $table->timestamps();    
+        Schema::table('customers', function (Blueprint $table) {
+            $table->string('phone');  
+
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('group_role');
+        Schema::table('customers', function (Blueprint $table) {
+            //
+        });
     }
 };

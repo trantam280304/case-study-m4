@@ -1,22 +1,20 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\OrderController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
+Route::get('/loginadmin', [AuthController::class, 'login'])->name('loginadmin');
+Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
+Route::post('/logoutadmin', [AuthController::class, 'logout'])->name('logoutadmin');
+
+Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function () {
 // categorie routes
 // thung rac
 
@@ -65,25 +63,46 @@ Route::post('/products/store', [ProductController::class, 'store'])->name('produ
 
 Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::get('/', function () {
-    return view('admin.master');
+ //
+ Route::get('/groups', [GroupController::class, 'index'])->name('group.index');
+ Route::get('/create', [GroupController::class, 'create'])->name('group.create');
+ Route::post('/store', [GroupController::class, 'store'])->name('group.store');
+ Route::get('/edit/{id}', [GroupController::class, 'edit'])->name('group.edit');
+ Route::put('/update/{id}', [GroupController::class, 'update'])->name('group.update');
+ Route::delete('destroy/{id}', [GroupController::class, 'destroy'])->name('group.destroy');
+ Route::get('group/detail/{id}', [GroupController::class, 'detail'])->name('group.detail');
+ Route::put('/group_detail/{id}', [GroupController::class, 'group_detail'])->name('group.group_detail');
+
+// oder
+// oder 
+Route::prefix('order')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('order.detail');
 });
 
-Route::get('/sign-in', function () {
-    return view('admin.sign-in');
-});
 
-Route::get('/sign-up', function () {
-    return view('admin.sign-up');
-});
 
-// Route::get('/shop', function () {
-//     return view('shop.home');
+// Route::get('/', function () {
+//     return view('admin.master');
 // });
 
-// Route::get('/cart', function () {
-//     return view('shop.cart');
+// Route::get('/sign-in', function () {
+//     return view('admin.sign-in');
 // });
+
+// Route::get('/sign-up', function () {
+//     return view('admin.sign-up');
+// });
+
+});
+
+
+
+
+
+
+
+
 
 
 // ddnawg ky shop
@@ -92,11 +111,14 @@ Route::get('shop/register', [ShopController::class, 'register'])->name('shop.reg
 
 Route::post('shop/checkRegister', [ShopController::class, 'checkRegister'])->name('shop.checkRegister');
 
-// dang nhap shop
+// dang nhap  dang xuat shop
 Route::get('/login-index', [ShopController::class, 'indexlogin'])->name('login.index');
 
 Route::post('/login', [ShopController::class, 'checklogin'])->name('shop.checklogin');
 
+Route::post('/logout', [ShopController::class, 'logout'])->name('shop.logout');
+
+        
 
 
 Route::get('/shop', [ShopController::class, 'shop'])->name('shop.layoutmaster');
@@ -112,6 +134,10 @@ Route::get('/cart', [ShopController::class, 'cart'])->name('shop.cart');
 Route::get('add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [ShopController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
+
+// checkout cart.
+
+Route::get('/checkout', [ShopController::class, 'checkout'])->name('shop.checkout');
 
 
 

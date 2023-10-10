@@ -9,6 +9,7 @@ use App\Http\Requests\ProductRequest;
 class ProductController extends Controller
 {
     // Phần hiển thị chung
+
     public function index(Request $request)
     {
         // Phân trang và tìm kiếm

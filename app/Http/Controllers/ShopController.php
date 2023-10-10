@@ -30,6 +30,8 @@ class ShopController extends Controller
         $customer->name = $request->name;
         $customer->address =  $request->address;
         $customer->email = $request->email;
+        $customer->phone = $request->phone;
+
         $customer->password = bcrypt($request->password);
         if ($request->password == $request->psw_repeat) {
             $customer->save();
@@ -58,6 +60,15 @@ class ShopController extends Controller
     public function indexlogin()
     {
         return view('shop.loginlogout.login');
+    }
+
+    // logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('shop.layoutmaster');
     }
     
     
@@ -163,7 +174,12 @@ class ShopController extends Controller
             session()->flash('success', 'Product removed successfully');
         }
     }
-    
+    // checkout
+    public function checkout()
+    {
+        return view('shop.checkout');
+    }
+
     
    
 }

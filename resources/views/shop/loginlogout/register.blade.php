@@ -81,6 +81,9 @@ a {
     <label for="name"><b>name</b></label>
     <input type="text" placeholder="Enter name" name="name" id="name" >
 
+    <label for="phone"><b>phone</b></label>
+    <input type="text" placeholder="Enter phone" name="phone" id="phone" >
+
     <label for="address"><b>address</b></label>
     <input type="text" placeholder="Enter address" name="address" id="address" >
 

@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
-
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
     // Phần hiển thị chung
     public function index(Request $request)
     {
+        $this->authorize('viewAny', User::class);
         // Phân trang và tìm kiếm
         $categories = Category::paginate(2);
         if (isset($request->keyword)) {
@@ -33,11 +36,13 @@ class CategoryController extends Controller
     }
     public function create()
     {
+        $this->authorize('create', Category::class);
         return view('admin.categories.create');
     }
     // Xử lý thêm thì phải có Request
     public function store(CategoryRequest $request)
     {
+        $this->authorize('create', Category::class);
         // $validated = $request->validate(
         //     [
         //         'name' => ['required', 'unique:categories', 'max:5'],
@@ -64,8 +69,11 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $categories = Category::find($id);
-        return view('admin.categories.edit', compact('categories'));
+        return view('admin.categories.edit', compact(['categories']));
+       
     }
+   
+
     public function update(Request $request, $id)
     {
         $categories = Category::find($id);
