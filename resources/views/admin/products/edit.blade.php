@@ -60,7 +60,7 @@
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">EDIT PRODUCTS </h6>
+                    <h6 class="text-white text-capitalize ps-3">SỬA SẢN PHẨM </h6>
                 </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -69,31 +69,31 @@
                     <form action="<?php echo route('products.update', $products->id) ?>" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <label for="name">NAME:</label>
+                        <label for="name">TÊN:</label>
                         <br>
                         <input type="text" id="name" name="name" value="{{$products->name}}">
                         <br>
-                        <label for="name">slug:</label>
+                        <label for="name">SLUG:</label>
                         <br>
                         <input type="text" id="slug" name="slug" value="{{$products->slug}}">
                         <br>
-                        <label for="name"> price:</label>
+                        <label for="name"> GIÁ :</label>
                         <br>
                         <input type="text" id="price" name="price" value="{{$products->price}}">
                         <br>
 
-                        <label for="description">DESCRIPTION :</label>
+                        <label for="description">MÔ TẢ :</label>
                         <textarea name="description" id="description">{{$products->description}}</textarea>
                         <br>
 
                         
 
 
-                        <label for="quantity">quantity:</label>
+                        <label for="quantity">SỐ LƯỢNG:</label>
                         <br>
                         <input type="text" id="quantity" name="quantity" value="{{$products->quantity}}">
                         <br>
-                        <label for="status">status:</label>
+                        <label for="status">TRẠNG THÁI:</label>
                         <br>
                         <!-- select còn hàng hết hàng  -->
                         <select id="status" name="status" style="width: 90%">
@@ -101,7 +101,7 @@
                             <option value="1" {{ $products->status == '1' ? 'selected' : '' }}>Hết hàng</option>
                         </select>
                         <br><br>
-                        <label>Category_id</label>
+                        <label>LOẠI HÀNG</label>
                         <select name="category_id" style="width: 177px;">
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ $category->id == $products->category_id ? 'selected' : '' }}>
@@ -110,14 +110,14 @@
                             @endforeach
                         </select><br><br>
 
-                        <label for="image">IMAGE :</label>
+                        <label for="image">ẢNH :</label>
                         <input type="file" class="form-control-file" id="image" name="image">
                         <br>
                         <img src="{{ asset($products->image) ?? asset('public/images/' . old('image', $products->image)) }}" width="90px" height="90px" id="blah1" alt="">
                         <br><br><br>
                         <div class="button-group">
-                            <input type="submit" value="UPDATE" class="btn btn-primary">
-                            <a href="{{ route('products.index') }}" class="btn-back btn">BACK</a>
+                            <input type="submit" value="CẬP NHẬT" class="btn btn-primary">
+                            <a href="{{ route('products.index') }}" class="btn-back btn">QUAY LẠI</a>
                         </div>
                     </form>
                 </div>

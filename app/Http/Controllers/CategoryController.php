@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\App;
 use App\Models\Category;
 use App\Models\User;
 
@@ -125,5 +125,12 @@ class CategoryController extends Controller
         $categories = Category::withTrashed()->where('id', $id);
         $categories->restore();
         return redirect()->route('categories.trash');
+    }
+    // chuyển đổi ngôn ngữ
+    public function change(Request $request)
+    {
+        App::setLocale($request->lang);
+        session()->put('locale', $request->lang);
+        return redirect()->back();
     }
 }

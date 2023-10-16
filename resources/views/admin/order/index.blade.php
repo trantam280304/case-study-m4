@@ -19,8 +19,8 @@
                         <th scope="col">Số Điện Thoại</th>
                         <th scope="col">Địa Chỉ</th>
                         <th scope="col">Ngày Đặt Hàng</th>
-
                         <th scope="col">Tùy Chọn</th>
+                        <th scope="col">Xóa</th> <!-- Thêm cột Xóa -->
                     </tr>
                 </thead>
                 <tbody>
@@ -36,12 +36,20 @@
                         <td>
                             <a class='btn btn-info' href="{{ route('order.detail', $item->id) }}">Chi tiết</a>
                         </td>
+                        <td>
+                            <!-- Thêm nút xóa -->
+                            <form action="{{ route('order.destroy', $item->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                            </form>
+                        </td>
                     </tr>
+
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-</div>
 </div>
 @endsection

@@ -39,14 +39,14 @@
 
     @include('shop.includes.sidebar')
     @endif
-    
+
     <!-- Products Start -->
-   @yield('content')
+    @yield('content')
     <!-- Products End -->
 
 
     <!-- Vendor Start -->
-   
+
     <!-- Vendor End -->
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ProductController extends Controller
             $products = Product::where('name', 'like', "%$keyword%")
                 ->paginate();
         }
-       // thông báo
+        // thông báo
         $successMessage = '';
         if ($request->session()->has('successMessage')) {
             $successMessage = $request->session()->get('successMessage');
@@ -27,15 +28,16 @@ class ProductController extends Controller
             $successMessage = $request->session()->get('successMessage1');
         } elseif ($request->session()->has('successMessage2')) {
             $successMessage = $request->session()->get('successMessage2');
-        } 
-        // truyền compact 
-        return view('admin.products.index', compact('products','successMessage'));
+        } elseif ($request->session()->has('successMessage3')) {
+            $successMessage = $request->session()->get('successMessage3');
+        }
+        return view('admin.products.index', compact('products', 'successMessage'));
     }
     public function create()
     {
         // khai báo biến categories
         $categories = Category::get();
-        return view('admin.products.create',compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
     public function store(ProductRequest $request)
     {
@@ -62,7 +64,7 @@ class ProductController extends Controller
 
 
         $products->save();
-        $request->session()->flash('successMessage', 'More success');
+        $request->session()->flash('successMessage', 'Thêm thành công');
         return redirect()->route('products.index');
     }
     // Chỉnh sửa
@@ -71,12 +73,12 @@ class ProductController extends Controller
         $products = Product::find($id);
         $categories = Category::get();
 
-        return view('admin.products.edit', compact('products','categories'));
+        return view('admin.products.edit', compact('products', 'categories'));
     }
     public function update(Request $request, $id)
     {
         $products = Product::find($id);
-        
+
         $products->name = $request->name;
         $products->slug = $request->slug;
         $products->price = $request->price;
@@ -84,28 +86,30 @@ class ProductController extends Controller
         $products->quantity = $request->quantity;
         $products->status = $request->status;
         $products->category_id = $request->category_id;
-         // Xử lý ảnh
-         $fieldName = 'image';
-         if ($request->hasFile($fieldName)) {
-             $fullFileNameOrigin = $request->file($fieldName)->getClientOriginalName();
-             $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
-             $extension = $request->file($fieldName)->getClientOriginalExtension();
-             $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extension;
-             $path = 'storage/' . $request->file($fieldName)->storeAs('public/images', $fileName);
-             $path = str_replace('public/', '', $path);
-             $products->image = $path;
-         }
+        // Xử lý ảnh
+        $fieldName = 'image';
+        if ($request->hasFile($fieldName)) {
+            $fullFileNameOrigin = $request->file($fieldName)->getClientOriginalName();
+            $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
+            $extension = $request->file($fieldName)->getClientOriginalExtension();
+            $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extension;
+            $path = 'storage/' . $request->file($fieldName)->storeAs('public/images', $fileName);
+            $path = str_replace('public/', '', $path);
+            $products->image = $path;
+        }
         $products->save();
-        $request->session()->flash('successMessage1', 'Update successful');
+        $request->session()->flash('successMessage1', 'Sửa thành công');
         return redirect()->route('products.index');
-    } 
+    }
     // Xóa
-    public function destroy( Request $request,$id)
+    public function destroy(Request $request, $id)
     {
-        $products = Product::find($id);
-        $products->delete();
-        $request->session()->flash('successMessage2', 'Deleted successfully');
-        return redirect()->route('products.index');
+        $product = Product::onlyTrashed()->findOrFail($id);
+        $product->forceDelete();
+        
+        $request->session()->flash('successMessage2', 'Xóa thành công');
+
+        return redirect()->route('products.trash');
     }
 
     // Xem
@@ -115,28 +119,33 @@ class ProductController extends Controller
         return view('admin.products.show', compact('products'));
     }
 
-    
-      // xoa thung rac
-      public  function softdeletes($id)
-      {
-          date_default_timezone_set("Asia/Ho_Chi_Minh");
-          $products = Product::findOrFail($id);
-          $products->deleted_at = date("Y-m-d h:i:s");
-          $products->save();
-          return redirect()->route('products.index');
-      }
-  
-      public  function trash()
-      {
-          $products = Product::onlyTrashed()->get();
-          $param = ['products'    => $products];
-          return view('admin.products.trash', $param);
-      }
-      // khôi phục xóa 
-      public function restoredelete($id)
-      {
-          $products = Product::withTrashed()->where('id', $id);
-          $products->restore();
-          return redirect()->route('products.trash');
-      }
+
+    // xoa thung rac
+    public  function softdeletes(Request $request, $id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $products = Product::findOrFail($id);
+        $products->deleted_at = date("Y-m-d h:i:s");
+        $products->save();
+
+        $request->session()->flash('successMessage2', 'Xóa thành công');
+
+        return redirect()->route('products.index');
+    }
+
+    public  function trash()
+    {
+        $products = Product::onlyTrashed()->get();
+
+        $param = ['products'    => $products];
+        return view('admin.products.trash', $param);
+    }
+    // khôi phục xóa 
+    public function restoredelete($id, Request $request)
+    {
+        $products = Product::withTrashed()->where('id', $id);
+        $products->restore();
+        $request->session()->flash('successMessage3', 'khôi phục thành công');
+        return redirect()->route('products.trash');
+    }
 }

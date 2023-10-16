@@ -61,7 +61,7 @@
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">EDIT CATEGORY </h6>
+                    <h6 class="text-white text-capitalize ps-3">{{ __('language.EDIT') }}</h6>
                 </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -70,15 +70,15 @@
                     <form action="<?php echo route('categories.update', $categories->id) ?>" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <label for="name">NAME:</label>
+                        <label for="name">{{ __('language.NAME') }} :</label>
                         <br>
                         <input type="text" id="name" name="name" value="{{$categories->name}}">
                         <br>
-                        <label for="name">delete_at:</label>
-                        <input type="date" id="delete_at" name="delete_at" value="{{$categories->delete_at}}">
+                        <label for="name">{{ __('language.DELETE_AT') }} :</label>
+                        <input type="date" id="delete_at" name="delete_at" value="{{$categories->delete_at}}"><br></br>
                         <div class="button-group">
-                            <input type="submit" value="UPDATE" class="btn btn-primary">
-                            <a href="{{ route('categories.index') }}" class="btn-back btn">BACK</a>
+                            <input type="submit" value="{{ __('language.ADD NEW') }}" class="btn btn-primary">
+                            <a href="{{ route('categories.index') }}" class="btn-back btn">{{ __('language.BACK') }}</a>
                         </div>
                     </form>
                 </div>

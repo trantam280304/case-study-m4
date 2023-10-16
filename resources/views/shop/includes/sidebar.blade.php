@@ -2,28 +2,22 @@
     <div class="row border-top px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
             <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                <h6 class="m-0">Categories</h6>
+                <h6 class="m-0">Loại hàng</h6>
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                 <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <a href="#" class="nav-link" data-toggle="dropdown">Nước rửa chén <i class="fa fa-angle-down float-right mt-1"></i></a>
+
+                        <a href="#" class="nav-link" data-toggle="dropdown">Nước gi <i class="fa fa-angle-down float-right mt-1"></i></a>
                         <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                             <a href="" class="dropdown-item">Men's Dresses</a>
                             <a href="" class="dropdown-item">Women's Dresses</a>
                             <a href="" class="dropdown-item">Baby's Dresses</a>
                         </div>
                     </div>
-                    <a href="" class="nav-item nav-link">Shirts</a>
-                    <a href="" class="nav-item nav-link">Jeans</a>
-                    <a href="" class="nav-item nav-link">Swimwear</a>
-                    <a href="" class="nav-item nav-link">Sleepwear</a>
-                    <a href="" class="nav-item nav-link">Sportswear</a>
-                    <a href="" class="nav-item nav-link">Jumpsuits</a>
-                    <a href="" class="nav-item nav-link">Blazers</a>
-                    <a href="" class="nav-item nav-link">Jackets</a>
-                    <a href="" class="nav-item nav-link">Shoes</a>
+
                 </div>
             </nav>
         </div>
@@ -37,25 +31,73 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
-                        <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+                        <a href="index.html" class="nav-item nav-link active">Trảng chủ</a>
+                        <a href="shop.html" class="nav-item nav-link">Cửa hàng</a>
+                        <a href="detail.html" class="nav-item nav-link">Chi tiết</a>
+                        <a href="contact.html" class="nav-item nav-link">Tư vấn</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">TÔi</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                <a href="{{ route('login.index') }}" class="nav-item nav-link">Đăng nhập</a>
+                                <a href="{{ route('shop.register') }}" class="nav-item nav-link">Đăng ký</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-flex justify-content-between align-items-center">
-                        <a href="{{ route('login.index') }}" class="nav-item nav-link">Login</a>
                         <form method="POST" action="{{ route('shop.logout') }}">
                             @csrf
-                            <button type="submit" class="btn btn-link text-brown">Log Out</button>
+                            <button type="submit" class="btn btn-link text-bro  wn">Đăng xuất</button>
+
+                            <body>
+
+                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.css">
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.js"></script>
+                                @if (session('successMessage'))
+                                <script>
+                                    Swal.fire({
+                                        title: "<h6>{{ session('successMessage') }}</h6>",
+                                        icon: "success",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        width: "300px"
+                                    });
+                                </script>
+                                @elseif(session('successMessage1'))
+                                <script>
+                                    Swal.fire({
+                                        title: "<h6>{{ session('successMessage1') }}</h6>",
+                                        icon: "success",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        width: "300px"
+                                    });
+                                </script>
+                                @elseif(session('successMessage2'))
+                                <script>
+                                    Swal.fire({
+                                        title: "<h6>{{ session('successMessage2') }}</h6>",
+                                        icon: "success",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        width: "300px"
+                                    });
+                                </script>
+                                @elseif(session('successMessage3'))
+                                <script>
+                                    Swal.fire({
+                                        title: "<h6>{{ session('successMessage3') }}</h6>",
+                                        icon: "success",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        width: "300px"
+                                    });
+                                </script>
+                                @endif
+
+
+                            </body>
                         </form>
-                        <a href="{{ route('shop.register') }}" class="nav-item nav-link">Register</a>
                     </div>
                 </div>
             </nav>
@@ -65,9 +107,7 @@
                         <img class="img-fluid" src="{{asset('shops/img/tt.jpg')}}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">giảm 30 % khi đặt 2 sản phẩm</h4>
                             </div>
                         </div>
                     </div>
@@ -75,10 +115,8 @@
                         <img class="img-fluid" src="{{asset('shops/img/th.jpg')}}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">giảm 30 % khi đặt 2 sản phẩm</h4>
 
-                                <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
                             </div>
                         </div>
                     </div>

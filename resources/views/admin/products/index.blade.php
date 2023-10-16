@@ -9,11 +9,11 @@
     <button type="submit" class="search-button">
         <i class="fas fa-search"></i>
     </button>
-    <input type="text" id="keyword" name="keyword" class="search-input" placeholder="search for ...">
+    <input type="text" id="keyword" name="keyword" class="search-input" placeholder="tìm kiếm ...">
 </form>
 <a href="{{ route('products.create') }}" class="btn btn-primary">
     <i class="fas fa-plus"></i>
-    ADD PRODUCTS
+    THÊM SẢN PHẨM
 </a><br></br>
 
 <div class="row">
@@ -21,7 +21,7 @@
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h3 class="text-white text-capitalize ps-3">PRODUCTS</h3>
+                    <h3 class="text-white text-capitalize ps-3">SẢN PHẨM</h3>
                 </div>
             </div>
             <br>
@@ -30,12 +30,12 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Name</th>
-                        <th>price</th>
-                        <th>status</th>
-                        <th>category </th>
-                        <th>image</th>
-                        <th>ACTION</th>
+                        <th>TÊN</th>
+                        <th>GIÁ</th>
+                        <th>TRẠNG THÁI</th>
+                        <th>LOẠI HÀNG </th>
+                        <th>ẢNH</th>
+                        <th>TÙY CHỈNH </th>
                     </tr>
                     @foreach ($products as $key => $product)
                     <tr>
@@ -56,14 +56,14 @@
                         <td><img width="90px" height="90px" src="{{ asset($product->image) }}" alt=""></td>
 
                         <td>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                @method('DELETE')
+                            <form action="{{ route('products.softdeletes', $product->id) }}" method="POST">
+                                @method('put')
                                 @csrf
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> EDIT</a>
+                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> SỬA</a>
                                 <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i> SEE
+                                    <i class="fas fa-eye"></i> XEM
                                 </a>
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure ?')"><i class="fas fa-trash"></i> DELETE</button>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có muốn xóa ?')"><i class="fas fa-trash"></i> XÓA</button>
                             </form>
                         </td>
                     </tr>
@@ -99,6 +99,16 @@
                     <script>
                         Swal.fire({
                             title: "<h6>{{ session('successMessage2') }}</h6>",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            width: "300px"
+                        });
+                    </script>
+                    @elseif(session('successMessage3'))
+                    <script>
+                        Swal.fire({
+                            title: "<h6>{{ session('successMessage3') }}</h6>",
                             icon: "success",
                             showConfirmButton: false,
                             timer: 2000,

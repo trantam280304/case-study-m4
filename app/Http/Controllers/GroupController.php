@@ -15,7 +15,7 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $this->authorize('viewAny',Group::class);
 
@@ -25,6 +25,8 @@ class GroupController extends Controller
             'groups' => $groups,
             'users' => $users
         ];
+        
+
         return view('admin.groups.index', $param);
     }
     // sửa
@@ -49,8 +51,7 @@ class GroupController extends Controller
         $group->name = $request->name;
         $group->save();
         $notification = [
-            'message' => 'Chỉnh Sửa Thành Công!',
-            'alert-type' => 'success'
+            'updategroup' => 'Chỉnh Sửa Thành Công!',
         ];
         return redirect()->route('group.index')->with($notification);
     }
@@ -77,6 +78,7 @@ class GroupController extends Controller
         $group = new Group();
         $group->name = $request->name;
         $group->save();
+
         return redirect()->route('group.index')->with($notification);
     }
 

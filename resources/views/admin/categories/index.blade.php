@@ -6,29 +6,42 @@
     <button type="submit" class="search-button">
         <i class="fas fa-search"></i>
     </button>
-    <input type="text" id="keyword" name="keyword" class="search-input" placeholder="search for ...">
+    <input type="text" id="keyword" name="keyword" class="search-input" placeholder="  {{ __('language.search for ...') }}">
 </form>
 <a href="{{ route('categories.create') }}" class="btn btn-primary">
     <i class="fas fa-plus"></i>
-    ADD CATEGORY
+    {{ __('language.ADD CATEGORY') }}
 </a><br></br>
-
+<li class="nav-item dropdown">
+    <div class="select-wrapper">
+        <select class="form-control changeLang ">
+            <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>EN</option>
+            <option value="vi" {{ session()->get('locale') == 'vi' ? 'selected' : '' }}>VI</option>
+            <i class="fas fa-chevron-down"></i>
+        </select>
+    </div>
+</li>
+<br></br>
 <div class="row">
     <div class="col-12">
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h3 class="text-white text-capitalize ps-3">CATEGORY</h3>
+                    <h3 class="text-white text-capitalize ps-3">{{ __('language.category') }}
+                    </h3>
                 </div>
             </div>
+            <!-- chuyển đổi ngôn ngữ -->
+
             <br>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Name</th>
-                        <th>delete_at</th>
-                        <th>ACTION</th>
+                        <th>{{ __('language.STT') }}</th>
+                        <th>{{ __('language.Name') }}</th>
+                        <th>{{ __('language.Delete_at') }}</th>
+                        <th>{{ __('language.ACTION') }}</th>
+
                     </tr>
                     @foreach ($categories as $key => $category)
                     <tr>
@@ -41,12 +54,12 @@
                                 @method('PUT')
                                 @csrf
 
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> EDIT</a>
-                                
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có muốn chuyển nó đến thùng rác ?')"><i class="fas fa-trash"></i> DELETE</button>
-                            </form>
+                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> {{ __('language.EDIT') }}</a>
+
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ __('language.Do you want to move it to the trash?') }}')"><i class="fas fa-trash"></i> {{ __('language.DELETE') }}</button>                            </form>
                         </td>
                     </tr>
+
                     @endforeach
                 </thead>
 
@@ -101,6 +114,79 @@
 </div>
 
 <style>
+    .select-wrapper {
+        position: relative;
+    }
+
+    .select-wrapper::after {
+        content: '\f078';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .form-control {
+        padding-right: 30px;
+        /* Để tạo không gian cho biểu tượng mũi tên */
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown .form-control {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        font-size: 14px;
+        background-image: url('path/to/arrow.png');
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: 12px;
+        padding-right: 24px;
+        /* thêm khoảng trống bên phải để làm cho mũi tên không bị chồng lên nội dung */
+    }
+
+    .dropdown .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    .dropdown .form-control option {
+        padding: 8px;
+    }
+
+    .dropdown .form-control option:selected {
+        font-weight: bold;
+    }
+
+    .changeLang {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .changeLang option {
+        background-color: #fff;
+        color: #333;
+    }
+
+    .changeLang option:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+
     .search-form {
         float: right;
         display: flex;

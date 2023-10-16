@@ -9,25 +9,25 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                        <h3 class="text-white text-capitalize ps-3">ADD product</h3>
+                        <h3 class="text-white text-capitalize ps-3">Thêm sản phẩm</h3>
                     </div>
                 </div>
                 <br>
                 <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <label>Name:</label><br>
+                    <label>TÊN :</label><br>
                     <input type="text" name="name" value="{{ old('name') }}" style="width: 90%"><br>
                     @error('name')
                     <div style="color: red">{{ $message }}</div>
                     @enderror
 
-                    <label>Slug:</label><br>
+                    <label>SLUG:</label><br>
                     <input type="text" name="slug" value="{{ old('slug') }}" style="width: 90%"><br>
                     @error('slug')
                     <div style="color: red">{{ $message }}</div>
                     @enderror
 
-                    <label>price:</label><br>
+                    <label>GIÁ:</label><br>
                     <input type="number" name="price" value="{{ old('price') }}" style="width: 90%"><br>
                     @error('price')
                     <div style="color: red">{{ $message }}</div>
@@ -35,13 +35,13 @@
 
 
                     
-                    <label>quantity:</label><br>
+                    <label>SỐ LƯỢNG:</label><br>
                     <input type="text" name="quantity" value="{{ old('quantity') }}" style="width: 90%"><br>
                     @error('quantity')
                     <div style="color: red">{{ $message }}</div>
                     @enderror
                     
-                    <label>status:</label><br>
+                    <label>TRẠNG THÁI:</label><br>
                     <select name="status" style="width: 90%">
                         <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Còn hàng</option>
                         <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Hết hàng</option>
@@ -59,13 +59,13 @@
                         </option>
                         @endforeach
                     </select><br><br>
-                    <label for="image">IMAGE :</label>
+                    <label for="image">ẢNH  :</label>
                     <input type="file" name="image" id="image"><br></br>
                     @error('image')
                     <div style="color: red">{{ $message }}</div>
                     @enderror
                     
-                    <label for="description">DESCRIPTION :</label><br>
+                    <label for="description">MÔ TẢ :</label><br>
                         <textarea name="description" id="description" value="{{ old('description') }}" ></textarea><br>
                     @error('description')
                     <div style="color: red">{{ $message }}</div>

@@ -69,7 +69,7 @@
                                 <td>{{ $products->id }}</td>
                             </tr>
                             <tr>
-                                <td>NAME :</td>
+                                <td>TÊN :</td>
                                 <td>{{ $products->name }}</td>
                             </tr>
                             <tr>
@@ -77,20 +77,20 @@
                                 <td>{{ $products->slug }}</td>
                             </tr>
                             <tr>
-                                <td>PRICE :</td>
+                                <td>GIÁ :</td>
                                 <td>{{ $products->price }}</td>
                             </tr>
                             <tr>
-                                <td>DESCRIPTION :</td>
-                                <td >{!! $products->description !!}</td>
+                                <td>MÔ TẢ :</td>
+                                <td>{!! $products->description !!}</td>
                             </tr>
 
                             <tr>
-                                <td>QUANNITY :</td>
+                                <td>SỐ LƯỢNG :</td>
                                 <td>{{ $products->quantity }}</td>
                             </tr>
                             <tr>
-                                <td>STATUS :</td>
+                                <td>TRẠNG THÁI :</td>
                                 @if ($products->status == 0)
                                 <td><span class="badge bg-success">
                                         <i class="fas fa-check-circle"></i> Còn hàng
@@ -102,18 +102,68 @@
                                 @endif
                             </tr>
                             <tr>
-                                <td>CATEGORY :</td>
+                                <td>LOẠI HÀNG :</td>
                                 <td>{{ $products->category->name }}</td>
                             </tr>
                             <tr>
-                                <td>IMAGE :</td>
+                                <td>ẢNH :</td>
                                 <td><img src="{{ asset($products->image) }}" alt="Ảnh" width="90px" height="90px"></td>
                             </tr>
 
-                            </thead>
-                       
+                        </thead>
+
+                        <body>
+
+                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.css">
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.1/dist/sweetalert2.min.js"></script>
+                            @if (session('successMessage'))
+                            <script>
+                                Swal.fire({
+                                    title: "<h6>{{ session('successMessage') }}</h6>",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    width: "300px"
+                                });
+                            </script>
+                            @elseif(session('successMessage1'))
+                            <script>
+                                Swal.fire({
+                                    title: "<h6>{{ session('successMessage1') }}</h6>",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    width: "300px"
+                                });
+                            </script>
+                            @elseif(session('successMessage2'))
+                            <script>
+                                Swal.fire({
+                                    title: "<h6>{{ session('successMessage2') }}</h6>",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    width: "300px"
+                                });
+                            </script>
+                            @elseif(session('successMessage3'))
+                            <script>
+                                Swal.fire({
+                                    title: "<h6>{{ session('successMessage3') }}</h6>",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    width: "300px"
+                                });
+                            </script>
+                            @endif
+
+
+                        </body>
+
                     </table>
-                    <a href="{{ route('products.index') }}" class="btn-back">BACK</a>
+                    <a href="{{ route('products.index') }}" class="btn-back">QUAY LẠI</a>
 
                 </div>
             </div>

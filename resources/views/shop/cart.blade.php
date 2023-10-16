@@ -3,11 +3,11 @@
 @section('content')
 <div class="container-fluid bg-secondary mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">GIỎ HÀNG</h1>
         <div class="d-inline-flex">
-            <p class="m-0"><a href="">Home</a></p>
+            <p class="m-0"><a href="">Trang chủ</a></p>
             <p class="m-0 px-2">-</p>
-            <p class="m-0">Shopping Cart</p>
+            <p class="m-0">GIỎ HÀNG</p>
         </div>
     </div>
 </div>
@@ -56,18 +56,18 @@
             
             <div class="card border-secondary mb-5">
                 <div class="card-header bg-secondary border-0">
-                    <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                    <h4 class="font-weight-semi-bold m-0">Tóm tắt giỏ hàng</h4>
                 </div>
 
 
             </div>
             <div class="card-footer border-secondary bg-transparent">
                 <div class="d-flex justify-content-between mt-2">
-                    <h5 class="font-weight-bold">Total</h5>
-                    <h5 class="font-weight-bold">${{ $total }}</h5>
+                    <h5 class="font-weight-bold">Tổng :</h5>
+                    <h5 class="font-weight-bold">{{ $total }} VND </h5>
                 </div>
-                <a href="{{ route('shop.checkout') }}">  <button class="btn btn-block btn-primary my-3 py-3"> Check Out   </button></a>
-                <a href="{{ route('shop.layoutmaster') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+                <a href="{{ route('shop.checkout') }}">  <button class="btn btn-block btn-primary my-3 py-3"> Thanh toán  </button></a>
+                <a href="{{ route('shop.layoutmaster') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua sắm</a>
             </div>
 
         </div>

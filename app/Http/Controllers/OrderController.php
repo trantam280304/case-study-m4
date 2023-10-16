@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        // $this->authorize('viewAny', Order::class);
+        // $this->authorize('viewAny', Order::class);   
         $items=Order::orderBy('id','DESC')->get();
         return view('admin.order.index',compact('items'));
     }
@@ -26,7 +26,7 @@ class OrderController extends Controller
         ->select('products.*', 'orderdetail.*','orders.id')
         ->where('orders.id','=',$id)->get();
         // dd($items);
-        return view('order.orderdetail',compact('items'));
+        return view('admin.order.orderdetail',compact('items'));
     }
     /**
      * Show the form for creating a new resource.
@@ -91,7 +91,9 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+        return redirect()->route('order.index');
     }
 
     public function exportOrder(){

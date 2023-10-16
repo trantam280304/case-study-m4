@@ -28,17 +28,17 @@
                     <small class="fas fa-star-half-alt"></small>
                     <small class="far fa-star"></small>
                 </div>
-                <small class="pt-1">(50 Reviews)</small>
+                <small class="pt-1">(50 lượt xem)</small>
             </div>
-            <h3 class="font-weight-semi-bold mb-4">{{ $product->price }} $</h3>
+            <h3 class="font-weight-semi-bold mb-4">{{ $product->price }} VND</h3>
             <p class="mb-4">{!! $product->description !!}</p>
             @if ($product->status == 0)
                 <span class="badge badge-success">
-                    <i class="fas fa-check-circle"></i> In Stock
+                    <i class="fas fa-check-circle"></i> Còn hàng
                 </span>
             @else
                 <span class="badge badge-danger">
-                    <i class="fas fa-times-circle"></i> Out of Stock
+                    <i class="fas fa-times-circle"></i> Hết hàng
                 </span>
             @endif
             <div class="d-flex align-items-center mb-4 pt-2">
@@ -60,14 +60,14 @@
                 <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-primary px-3">
                     <i class="fas fa-shopping-cart"></i>
                     <button type="button" class="btn btn-sm text-dark p-0">
-                        Add To Cart
+                        Giỏ hàng
                     </button>
                 </a>
                  
                 
             </div>
             <div class="d-flex pt-2">
-                <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
+                <p class="text-dark font-weight-medium mb-0 mr-2">Chia sẻ:</p>
                 <div class="d-inline-flex">
                     <a class="text-dark px-2" href="">
                         <i class="fab fa-facebook-f"></i>
@@ -108,9 +108,9 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">
                     <a href="{{ route('shop.detail', $product->id) }}" class="btn btn-sm text-dark p-0">
-                        <i class="fas fa-eye text-primary mr-1"></i>View Detail
+                        <i class="fas fa-eye text-primary mr-1"></i>Chi tiết
                     </a>
-                     <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                     <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Giỏ hàng</a>
                 </div>
             </div>
         </div>

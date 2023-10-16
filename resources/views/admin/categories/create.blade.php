@@ -1,6 +1,6 @@
-
 @extends('admin.master')
 @section('content')
+
 <body>
 
     <div class="row">
@@ -8,25 +8,25 @@
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                        <h3 class="text-white text-capitalize ps-3">ADD CATEGORY</h3>
+                        <h3 class="text-white text-capitalize ps-3">{{ __('language.ADD') }} </h3>
                     </div>
                 </div>
                 <br>
                 <form action="{{route('categories.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <label>Name:</label><br>
-                    <input type="text" name="name" value="{{ old('name') }}" >
+                    <label>{{ __('language.NAME') }}:</label><br>
+                    <input type="text" name="name" value="{{ old('name') }}">
                     @error('name')
                     <div style="color: red">{{ $message }}</div>
                     @enderror
-                    <label >Delete_at :</label>
-                    <input type="date" name="delete_at" value="{{ old('delete_at') }}" >
-<br></br>
+                    <label>{{ __('language.DELETE_AT') }}</label>
+                    <input type="date" name="delete_at" value="{{ old('delete_at') }}">
+                    <br></br>
                     @error('delete_at')
                     <div style="color: red">{{ $message }}</div>
                     @enderror
-                    <input type="submit" value="THÊM MỚI">
-                    <a href="{{ route('categories.index') }}" class="btn-back">QUAY LẠI</a>
+                    <input type="submit" value="{{ __('language.ADD NEW') }}">
+                    <a href="{{ route('categories.index') }}" class="btn-back">{{ __('language.BACK') }}</a>
                 </form>
             </div>
         </div>
@@ -83,4 +83,3 @@
     }
 </style>
 @endsection
-
