@@ -15,24 +15,24 @@
                         <th scope="col">Tên Sản Phẩm</th>
                         <th scope="col">GIá(Đồng)</th>
                         <th scope="col">Số Lượng</th>
-                        <th scope="col">Tổng Tiền($)</th>
+                        <th scope="col">Tổng Tiền(VND)</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php $totalAll = 0 @endphp <!-- Sửa lại tên biến thành $totalAll = 0 -->
-                    @foreach ($items as $key => $item)
-                    @php $totalAll += $item->total @endphp <!-- Điều chỉnh cách tính tổng tiền -->
+                    @foreach ($orderdetails as $key => $orderdetail)
+                    @php $totalAll += $orderdetail->total @endphp <!-- Điều chỉnh cách tính tổng tiền -->
                     <tr>
                         <th scope="row">{{ ++$key }}</th>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ number_format($item->price) }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ number_format($item->total) }}</td>
+                        <td>{{ $orderdetail->name }}</td>
+                        <td>{{ number_format($orderdetail->price) }}</td>
+                        <td>{{ $orderdetail->quantity }}</td>
+                        <td>{{ number_format($orderdetail->total) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-             <h4>Tổng Tiền của đơn hàng: {{ number_format($totalAll) }} $</h4> <!-- Hiển thị tổng tiền của đơn hàng -->
+             <h4>Tổng Tiền của đơn hàng: {{ number_format($totalAll) }} VND</h4> 
         </div>
     </div>
 </div>

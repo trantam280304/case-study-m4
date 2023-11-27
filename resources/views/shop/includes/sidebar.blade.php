@@ -10,7 +10,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown">Nước rửa chén <i class="fa fa-angle-down float-right mt-1"></i></a>
 
-                        <a href="#" class="nav-link" data-toggle="dropdown">Nước gi <i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <a href="#" class="nav-link" data-toggle="dropdown">Nước giặt <i class="fa fa-angle-down float-right mt-1"></i></a>
                         <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                             <a href="" class="dropdown-item">Men's Dresses</a>
                             <a href="" class="dropdown-item">Women's Dresses</a>
@@ -112,7 +112,7 @@
                         </div>
                     </div>
                     <div class="carousel-item" style="height: 410px;">
-                        <img class="img-fluid" src="{{asset('shops/img/th.jpg')}}" alt="Image">
+                        <img class="img-fluid" src="{{asset('shops/img/tam.jpg')}}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3">giảm 30 % khi đặt 2 sản phẩm</h4>

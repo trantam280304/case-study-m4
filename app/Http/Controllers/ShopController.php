@@ -53,7 +53,7 @@ class ShopController extends Controller
 
             return redirect()->route('login.index', compact('successMessage'));
         } else {
-            return redirect()->route('login-index')->with($notification);
+            return redirect()->route('login.index')->with($notification);
         }
     }
 
@@ -78,7 +78,13 @@ class ShopController extends Controller
             'password' => $request->password
         ];
         if (Auth::guard('customers')->attempt($arr)) {
+            // Lấy thông tin tên người dùng từ cơ sở dữ liệu hoặc nguồn dữ liệu tương ứng
+            $user = Auth::guard('customers')->user();
+            $userName = $user->name;
+
             $request->session()->flash('successMessage1', 'Đăng nhập thành công');
+            // Lưu tên người dùng vào session
+            $request->session()->put('userName', $userName);
 
             return redirect()->route('shop.layoutmaster');
         } else {
@@ -120,7 +126,7 @@ class ShopController extends Controller
 
     public function shop(Request $request)
     {
-        $products = Product::paginate(4);
+        $products = Product::paginate(8);
         if ($request->ajax()) {
             $view = view('shop.product_home', compact('products'))->render();
             return response()->json(['html' => $view]);
@@ -172,6 +178,7 @@ class ShopController extends Controller
             ];
         }
 
+
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
@@ -215,6 +222,15 @@ class ShopController extends Controller
 
     public function order(Request $request)
     {
+        $successMessage = '';
+        if ($request->session()->has('successMessage')) {
+            $successMessage = $request->session()->get('successMessage');
+        } elseif ($request->session()->has('successMessage1')) {
+            $successMessage = $request->session()->get('successMessage1');
+        } elseif ($request->session()->has('successMessage2')) {
+            $successMessage = $request->session()->get('successMessage2');
+        }
+
         if ($request->product_id == null) {
             return redirect()->back();
         } else {
@@ -238,21 +254,20 @@ class ShopController extends Controller
         $count_product = count($request->product_id);
         for ($i = 0; $i < $count_product; $i++) {
             $orderItem = new OrderDetail();
-            $orderItem->order_id =  $order->id;
+            $orderItem->order_id = $order->id;
             $orderItem->product_id = $request->product_id[$i];
             $orderItem->quantity = $request->quantity[$i];
             $orderItem->total = $request->total[$i];
+
             $orderItem->save();
             session()->forget('cart');
             DB::table('products')
                 ->where('id', '=', $orderItem->product_id)
                 ->decrement('quantity', $orderItem->quantity);
         }
-        $notification = [
-            'message' => 'success',
-        ];
 
+        $request->session()->flash('successMessage', 'thanh toán thành công');
 
-        return redirect()->route('shop.layoutmaster')->with($notification);;
+        return redirect()->route('shop.layoutmaster', compact('successMessage'));
     }
 }

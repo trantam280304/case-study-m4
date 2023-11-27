@@ -2,7 +2,7 @@
   <div class="container">
     <section id="content">
       <form action="{{ route('postlogin') }}" method="POST">
-        <h1>Login Form</h1>
+        <h1> Trang đăng nhập</h1>
         @csrf
         <div>
           <input type="text" placeholder="Email" name="email" />
@@ -11,7 +11,7 @@
           @endif
         </div>
         <div>
-          <input type="password" placeholder="Password" name="password" />
+          <input type="password" placeholder="Mật khẩu" name="password" />
           @if ($errors->any())
           <p style="color:red">{{ $errors->first('password') }}</p>
           @endif
@@ -67,20 +67,20 @@
 
         </body>
         <div>
-          <input type="submit" value="Log in" />
+          <input type="submit" value="Đăng nhập" />
           <a href="#">facebook</a>
           <a href="#">Zalo</a>
         </div>
       </form><!-- form -->
       <div class="button">
-        <a href="#">HELLO EVERYBODY ❤ </a>
+        <a href="#">XIN CHÀO MỌI NGƯỜI ❤ </a>
       </div><!-- button -->
     </section><!-- content -->
   </div><!-- container -->
 </body>
 <style>
   body {
-    background: #DCDDDF url(https://khoinguonsangtao.vn/wp-content/uploads/2022/07/hinh-nen-desktop-1.jpg);
+    background: #DCDDDF url(https://img2.thuthuatphanmem.vn/uploads/2018/11/30/hinh-nen-may-trang-dep_104324872.jpg);
     color: #000;
     font: 14px Arial;
     margin: 0 auto;

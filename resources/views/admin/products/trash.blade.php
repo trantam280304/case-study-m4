@@ -35,12 +35,20 @@
                         <td style="width:5%">{{ $key + 1 }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ number_format($product->price) }}</td>
-                        <td>{{ $product->description }}</td>
+                        <td>{!! $product->description !!}</td>
                         <td>{{ $product->quantity }}</td>
                         <td>
                             <img style="width:200px ; height: 165px ; border-radius:0%" src="{{ asset($product->image) }}" alt="">
                         </td>
-                        <td>{{ $product->status }}</td>
+                        @if ($product->status == 0)
+                        <td><span class="badge bg-success">
+                                <i class="fas fa-check-circle"></i> Còn hàng
+                            </span></td>
+                        @else
+                        <td> <span class="badge bg-danger">
+                                <i class="fas fa-times-circle"></i> Hết hàng
+                            </span></td>
+                        @endif
                         <td>{{ $product->category->name }}</td>
 
                         <td>

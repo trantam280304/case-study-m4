@@ -14,19 +14,19 @@ class OrderController extends Controller
     public function index()
     {
         // $this->authorize('viewAny', Order::class);   
-        $items=Order::orderBy('id','DESC')->get();
-        return view('admin.order.index',compact('items'));
+        $orders=Order::orderBy('id','DESC')->get();
+        return view('admin.order.index',compact('orders'));
     }
     public function detail($id)
     {
         // $this->authorize('view', Order::class);
-        $items=DB::table('orderdetail')
+        $orderdetails=DB::table('orderdetail')
         ->join('orders','orderdetail.order_id','=','orders.id')
         ->join('products','orderdetail.product_id','=','products.id')
         ->select('products.*', 'orderdetail.*','orders.id')
         ->where('orders.id','=',$id)->get();
-        // dd($items);
-        return view('admin.order.orderdetail',compact('items'));
+        // dd($order);
+        return view('admin.order.orderdetail',compact('orderdetails'));
     }
     /**
      * Show the form for creating a new resource.
@@ -80,8 +80,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        }
 
     /**
      * Remove the specified resource from storage.

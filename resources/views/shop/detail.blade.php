@@ -30,7 +30,7 @@
                 </div>
                 <small class="pt-1">(50 lượt xem)</small>
             </div>
-            <h3 class="font-weight-semi-bold mb-4">{{ $product->price }} VND</h3>
+            <h3 class="font-weight-semi-bold mb-4">{{number_format($product->price)  }} VND</h3>
             <p class="mb-4">{!! $product->description !!}</p>
             @if ($product->status == 0)
                 <span class="badge badge-success">
@@ -103,7 +103,7 @@
                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                     <h6 class="text-truncate mb-3">{{ $product->name }} </h6>
                     <div class="d-flex justify-content-center">
-                        <h6>{{ $product->price }} $</h6>
+                        <h6>{{number_format( $product->price) }} VND </h6>
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">

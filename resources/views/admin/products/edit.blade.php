@@ -79,7 +79,7 @@
                         <br>
                         <label for="name"> GIÁ :</label>
                         <br>
-                        <input type="text" id="price" name="price" value="{{$products->price}}">
+                        <input type="number" id="price" name="price" value="{{ ($products->price)}}">
                         <br>
 
                         <label for="description">MÔ TẢ :</label>

@@ -78,7 +78,7 @@
                             </tr>
                             <tr>
                                 <td>GIÁ :</td>
-                                <td>{{ $products->price }}</td>
+                                <td>{{ number_format($products->price) }}</td>
                             </tr>
                             <tr>
                                 <td>MÔ TẢ :</td>

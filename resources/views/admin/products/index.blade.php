@@ -41,7 +41,7 @@
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->price }}</td>
+                        <td>{{ number_format($product->price) }}</td>
                         <!-- select còn hàng và hết hàng -->
                         @if ($product->status == 0)
                         <td><span class="badge bg-success">
@@ -63,7 +63,7 @@
                                 <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-eye"></i> XEM
                                 </a>
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có muốn xóa ?')"><i class="fas fa-trash"></i> XÓA</button>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Chuyển đến thùng rác ?')"><i class="fas fa-trash"></i> XÓA</button>
                             </form>
                         </td>
                     </tr>

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -81,8 +82,6 @@ class UserController extends Controller
             'name' => $request->name,
             'pass' => $request->password,
         ];
-
-
         $notification = [
             'addgroup' => 'Thêm Tên Quyền Thành Công!',
         ];
@@ -130,7 +129,7 @@ class UserController extends Controller
         return redirect()->route('user.index')->with($notification);
     }
 
-//  xem 
+    //  xem 
     public function show($id)
     {
         $this->authorize('view', User::class);
@@ -155,7 +154,16 @@ class UserController extends Controller
         return view('admin.user.editpass', $param);
     }
 
-
+    // hiển thị form đổi mật khẩu
+    public function adminpass($id)
+    {
+        //  $this->authorize('adminUpdatePass', User::class);
+        $user = User::find($id);
+        $param = [
+            'user' => $user,
+        ];
+        return view('admin.user.adminpass', $param);
+    }
 
     // chỉ có superAdmin mới có quyền đổi mật khẩu người kh
     public function adminUpdatePass(Request $request, $id)
@@ -180,7 +188,7 @@ class UserController extends Controller
         }
     }
 
-    public function updatepass($request)
+    public function updatepass(Request $request)
     {
         if ($request->renewpassword == $request->newpassword) {
             if ((Hash::check($request->password, Auth::user()->password))) {
@@ -193,7 +201,6 @@ class UserController extends Controller
                 ];
                 return redirect()->route('user.index')->with($notification);
             } else {
-                // dd($request);
                 $notification = [
                     'saipass' => '!',
 
@@ -208,12 +215,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
 
     //  xóa

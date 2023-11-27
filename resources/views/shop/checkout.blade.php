@@ -76,13 +76,13 @@
                         $total = $details['price'] * $details['quantity'];
                         $totalAll += $total;
                         @endphp
-                        <h5 class="font-weight-medium mb-3">Products</h5>
+                        <h5 class="font-weight-medium mb-3">Sản phẩm</h5>
                         <div class="d-flex justify-content-between">
                             <p><input type="hidden" value="{{ $id }}" name="product_id[]">{{ $details['name'] ?? '' }}</p>
-                            <p>x <input type="hidden" value="{{ $id }}" name="quantity[]"> {{ $details['quantity'] ?? '' }} <input type="hidden" value="{{ $total }}" name="total[]"> </p>
+                            <p>x <input type="hidden" value="{{ $details['quantity'] }}" name="quantity[]"> {{ $details['quantity'] ?? '' }} <input type="hidden" value="{{ $total }}" name="total[]"> </p>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <p>{{ number_format($total) }} $</p>
+                            <p>{{ number_format($total) }} VND  </p>
                         </div>
                         <hr class="mt-0">
                         @endforeach

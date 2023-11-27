@@ -22,12 +22,12 @@
             <table class="table table-bordered text-center mb-0">
                 <thead class="bg-secondary text-dark">
                     <tr>
-                        <th style="width:30%">Products</th>
-                        <th>Price</th>
-                        <th style="width:8%">Quantity</th>
-                        <th>IMG</th>
-                        <th>Total</th>
-                        <th style="width:10%" >ACTION</th>
+                        <th style="width:30%">Sản phẩm</th>
+                        <th>Giá</th>
+                        <th style="width:8%">Số lượng</th>
+                        <th>Ảnh</th>
+                        <th>Tổng</th>
+                        <th style="width:10%" >Tùy chỉnh</th>
                     </tr>
                 </thead>
                 <tbody class="align-middle">
@@ -35,14 +35,14 @@
                     @php $total += $details['price'] * $details['quantity'] @endphp
                     <tr data-id="{{ $id }}">
                         <td class="align-middle"><img alt="" style="width: 50px;"> {{ $details['name'] }}</td>
-                        <td class="align-middle">${{ $details['price'] }}</td>
+                        <td class="align-middle">{{ number_format($details['price']) }} VND</td>
                         <td data-th="Quantity">
                             <input type="number" value="{{ $details['quantity'] }}" min="1" class="form-control quantity update-cart" />
                         </td>
                         </td>
                         <td class="align-middle"><img src="{{ $details['image'] }}" alt="" style="width: 70px;"> </td>
 
-                        <td class="align-middle"> $ {{ $details['price'] * $details['quantity'] }}</td>
+                        <td class="align-middle">  {{ number_format($details['price'] * $details['quantity']) }} VND </td>
                         <td class="actions" data-th="">
                         <button class="btn btn-danger btn-sm remove-from-cart"><i class="fas fa-trash-alt"></i></button>
                         </td>
@@ -64,7 +64,7 @@
             <div class="card-footer border-secondary bg-transparent">
                 <div class="d-flex justify-content-between mt-2">
                     <h5 class="font-weight-bold">Tổng :</h5>
-                    <h5 class="font-weight-bold">{{ $total }} VND </h5>
+                    <h5 class="font-weight-bold">{{ number_format($total) }} VND </h5>
                 </div>
                 <a href="{{ route('shop.checkout') }}">  <button class="btn btn-block btn-primary my-3 py-3"> Thanh toán  </button></a>
                 <a href="{{ route('shop.layoutmaster') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua sắm</a>
@@ -90,8 +90,8 @@
             method: "patch",
             data: {
                 _token: '{{ csrf_token() }}',
-                id: ele.parents("tr").attr("data-id"),
-                quantity: ele.parents("tr").find(".quantity").val()
+                id: ele.closest("tr").attr("data-id"),
+                quantity: ele.closest("tr").find(".quantity").val()
             },
             success: function (response) {
                window.location.reload();

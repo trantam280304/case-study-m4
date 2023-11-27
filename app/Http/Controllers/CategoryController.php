@@ -14,6 +14,7 @@ class CategoryController extends Controller
     // Phần hiển thị chung
     public function index(Request $request)
     {
+        try{
         $this->authorize('viewAny', User::class);
         // Phân trang và tìm kiếm
         $categories = Category::paginate(2);
@@ -32,7 +33,12 @@ class CategoryController extends Controller
             $successMessage = $request->session()->get('successMessage2');
         }
         return view('admin.categories.index', compact('categories','successMessage'));
-
+        } catch (\Exception $e) {
+            $notification = [
+                'updategroup' => 'Chỉnh Sửa Thành Công!',
+            ];
+            return back();
+        }  
     }
     public function create()
     {

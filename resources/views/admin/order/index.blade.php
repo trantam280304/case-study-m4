@@ -24,21 +24,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($items as $key => $item)
+                    @foreach ($orders as $key => $order)
                     <tr>
                         <th scope="row">{{ ++$key }}</th>
-                        <td>{{ $item->customer->name }}</td>
-                        <td>{{ $item->customer->email }}</td>
-                        <td>{{ $item->customer->phone }}</td>
-                        <td>{{ $item->customer->address }}</td>
-                        <td>{{ $item->date_at }}</td>
+                        <td>{{ $order->customer->name }}</td>
+                        <td>{{ $order->customer->email }}</td>
+                        <td>{{ $order->customer->phone }}</td>
+                        <td>{{ $order->customer->address }}</td>
+                        <td>{{ $order->date_at }}</td>
 
                         <td>
-                            <a class='btn btn-info' href="{{ route('order.detail', $item->id) }}">Chi tiết</a>
+                            <a class='btn btn-info' href="{{ route('order.detail', $order->id) }}">Chi tiết</a>
                         </td>
                         <td>
                             <!-- Thêm nút xóa -->
-                            <form action="{{ route('order.destroy', $item->id) }}" method="POST">
+                            <form action="{{ route('order.destroy', $order->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Xóa</button>
